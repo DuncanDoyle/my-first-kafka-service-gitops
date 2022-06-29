@@ -1,0 +1,29 @@
+config:
+  argocd:
+    namespace: openshift-gitops
+  pipelines:
+    name: cicd
+environments:
+- apps:
+  - name: app-my-first-kafka-service
+    services:
+    - name: my-first-kafka-service
+      pipelines:
+        integration:
+          bindings:
+          - dev-app-my-first-kafka-service-my-first-kafka-service-binding
+          - github-push-binding
+      source_url: https://github.com/DuncanDoyle/my-first-kafka-service.git
+      webhook:
+        secret:
+          name: webhook-secret-dev-my-first-kafka-service
+          namespace: cicd
+  name: dev
+  pipelines:
+    integration:
+      bindings:
+      - github-push-binding
+      template: app-ci-template
+- name: stage
+gitops_url: https://github.com/DuncanDoyle/my-first-kafka-service-gitops.git
+version: 1

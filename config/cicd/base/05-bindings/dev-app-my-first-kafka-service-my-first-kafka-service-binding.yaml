@@ -1,0 +1,13 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  creationTimestamp: null
+  name: dev-app-my-first-kafka-service-my-first-kafka-service-binding
+  namespace: cicd
+spec:
+  params:
+  - name: imageRepo
+    value: image-registry.openshift-image-registry.svc:5000/cicd/my-first-kafka-service
+  - name: tlsVerify
+    value: "false"
+status: {}
